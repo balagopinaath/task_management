@@ -2,6 +2,7 @@ import { Stack, SplashScreen } from 'expo-router';
 import { useFonts } from 'expo-font'
 import React, { useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
+import GlobalProvider, { useGlobalContext } from '../context/GlobalProvider';
 
 SplashScreen.preventAutoHideAsync()
 
@@ -27,13 +28,16 @@ const RootLayout = () => {
     if (!fontsLoaded && !error) return null
 
     return (
-        <React.Fragment>
-            <StatusBar style="auto" />
-            <Stack>
-                <Stack.Screen name='index' options={{ headerShown: false }} />
-                <Stack.Screen name='(auth)' options={{ headerShown: false }} />
-            </Stack>
-        </React.Fragment>
+        <GlobalProvider>
+            <React.Fragment>
+                <StatusBar style="auto" />
+                <Stack>
+                    <Stack.Screen name='index' options={{ headerShown: false }} />
+                    <Stack.Screen name='(auth)' options={{ headerShown: false }} />
+                    <Stack.Screen name='(home)' options={{ headerShown: false }} />
+                </Stack>
+            </React.Fragment>
+        </GlobalProvider>
     );
 }
 
